@@ -25,13 +25,13 @@ export default function Videos() {
                 />
               </Link>
             ) : (
-              <Link to="/quiz" key={video.youtubeID}>
+
                 <Video
                   id={video.youtubeID}
                   title={video.title}
                   noq={video.noq}
                 />
-              </Link>
+              
             )
           )}
         </InfiniteScroll>
