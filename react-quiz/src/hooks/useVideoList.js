@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react';
 
 export default function useVideoList(page) {
   const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [videos, setVideos] = useState([]);
   const [hasMore, setHasMore] = useState(true);
 

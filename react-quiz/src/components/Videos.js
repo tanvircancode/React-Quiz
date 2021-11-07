@@ -14,10 +14,11 @@ export default function Videos() {
         <InfiniteScroll
           dataLength={videos.length}
           hasMore={hasMore}
+          loader="Loading..."
           next={() => setPage(page + 8)}>
           {videos.map((video) =>
             video.noq > 0 ? (
-              <Link to="/quiz" key={video.youtubeID}>
+              <Link to={`/quiz/${video.youtubeID}`} key={video.youtubeID}>
                 <Video
                   id={video.youtubeID}
                   title={video.title}
@@ -25,13 +26,7 @@ export default function Videos() {
                 />
               </Link>
             ) : (
-
-                <Video
-                  id={video.youtubeID}
-                  title={video.title}
-                  noq={video.noq}
-                />
-              
+              <Video id={video.youtubeID} title={video.title} noq={video.noq} />
             )
           )}
         </InfiniteScroll>
