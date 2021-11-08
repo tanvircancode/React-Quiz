@@ -63,7 +63,7 @@ export default function Quiz() {
   // prev Question
   function prevQuestion() {
     if (currentQuestion >= 1 && currentQuestion <= questions.length - 1) {
-      setCurrentQuestion((prevCurrent) => prevCurrent + 1);
+      setCurrentQuestion((prevCurrent) => prevCurrent - 1);
     }
     }
 
