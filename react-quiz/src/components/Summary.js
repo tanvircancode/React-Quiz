@@ -1,15 +1,26 @@
+import { useMemo } from 'react';
 import successImage from '../assets/images/success.png';
 import useFetch from '../hooks/useFetch';
 import classes from '../styles/Summary.module.css';
 export default function Summary({ score, noq }) {
-  const getKeyword = () => {
+    
+  const getKeyword = useMemo(() => {
+    console.log('asdas');
     if ((score / (noq * 5)) * 100 < 50) {
       return 'failed';
     }
-  };
+    if ((score / (noq * 5)) * 100 < 75) {
+      return 'good';
+    }
+    if ((score / (noq * 5)) * 100 < 100) {
+      return 'very good';
+    } else {
+      return 'excellent';
+    }
+  }, [noq, score]);
 
   const { loading, error, result } = useFetch(
-    `https://api.pexels.com/v1/search?query=nature&per_page=1`,
+    `https://api.pexels.com/v1/search?query=${getKeyword()}&per_page=1`,
     'GET',
     {
       Authorization: process.env.REACT_APP_PEXELS_API_KEY,
@@ -25,9 +36,13 @@ export default function Summary({ score, noq }) {
         </p>
       </div>
 
-      <div className={classes.badge}>
-        <img src={image} alt="Success" />
-      </div>
+      {loading && <div className={classes.badge}>Loading your Badge</div>}
+      {error && <div className={classes.badge}>An error Occured</div>}
+      {!loading && !error && (
+        <div className={classes.badge}>
+          <img src={image} alt="Success" />
+        </div>
+      )}
     </div>
   );
 }
