@@ -3,9 +3,11 @@ import successImage from '../assets/images/success.png';
 import useFetch from '../hooks/useFetch';
 import classes from '../styles/Summary.module.css';
 export default function Summary({ score, noq }) {
-    
+
   const getKeyword = useMemo(() => {
-    console.log('asdas');
+      console.log('summm');
+    console.log(score);
+
     if ((score / (noq * 5)) * 100 < 50) {
       return 'failed';
     }
@@ -20,7 +22,7 @@ export default function Summary({ score, noq }) {
   }, [noq, score]);
 
   const { loading, error, result } = useFetch(
-    `https://api.pexels.com/v1/search?query=${getKeyword()}&per_page=1`,
+    `https://api.pexels.com/v1/search?query=${getKeyword}&per_page=1`,
     'GET',
     {
       Authorization: process.env.REACT_APP_PEXELS_API_KEY,
